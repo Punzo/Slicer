@@ -75,6 +75,7 @@ set(DisplayableManager_SRCS
   vtkMRMLModelDisplayableManager.cxx
   vtkMRMLViewDisplayableManager.cxx
   vtkMRMLThreeDReformatDisplayableManager.cxx
+  vtkMRMLThreeDSliceEdgeDisplayableManager.cxx
 
   # DisplayableManager associated with SliceView
   vtkMRMLCrosshairDisplayableManager.cxx
