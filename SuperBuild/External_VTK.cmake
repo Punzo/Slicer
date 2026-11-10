@@ -9,6 +9,9 @@ endif()
 if(Slicer_USE_TBB)
   list(APPEND ${proj}_DEPENDENCIES tbb)
 endif()
+if(Slicer_VTK_ENABLE_WEBGPU)
+  list(APPEND ${proj}_DEPENDENCIES Dawn)
+endif()
 
 # Include dependent projects if any
 ExternalProject_Include_Dependencies(${proj} PROJECT_VAR proj DEPENDS_VAR ${proj}_DEPENDENCIES)
@@ -92,6 +95,12 @@ if((NOT DEFINED VTK_DIR OR NOT DEFINED VTK_SOURCE_DIR) AND NOT Slicer_USE_SYSTEM
   if(Slicer_USE_TBB)
     list(APPEND EXTERNAL_PROJECT_OPTIONAL_VTK9_CMAKE_CACHE_ARGS
       -DTBB_DIR:PATH=${TBB_DIR}
+      )
+  endif()
+  if(Slicer_VTK_ENABLE_WEBGPU)
+    list(APPEND EXTERNAL_PROJECT_OPTIONAL_VTK9_CMAKE_CACHE_ARGS
+      -DVTK_ENABLE_WEBGPU:BOOL=ON
+      -DDawn_DIR:PATH=${Dawn_DIR}
       )
   endif()
   if(APPLE)

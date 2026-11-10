@@ -635,7 +635,17 @@ else()
   set(Slicer_USE_TBB FALSE)
 endif()
 
+# Experimental: build the VTK::RenderingWebGPU module (WebGPU through Dawn).
+# Slicer keeps rendering with OpenGL (VTK selects the OpenGL object factories
+# unless the VTK_GRAPHICS_BACKEND environment variable is set to WEBGPU); the
+# module is available to modules and extensions, e.g. for GPU compute shaders
+# (vtkWebGPUComputePipeline).
+option(Slicer_VTK_ENABLE_WEBGPU "Build VTK with the experimental WebGPU module (Dawn)" OFF)
+mark_as_advanced(Slicer_VTK_ENABLE_WEBGPU)
+mark_as_superbuild(Slicer_VTK_ENABLE_WEBGPU)
+
 message(STATUS "Configuring VTK")
+message(STATUS "  Slicer_VTK_ENABLE_WEBGPU is ${Slicer_VTK_ENABLE_WEBGPU}")
 message(STATUS "  Slicer_VTK_SMP_IMPLEMENTATION_TYPE is ${Slicer_VTK_SMP_IMPLEMENTATION_TYPE}")
 message(STATUS "  Slicer_VTK_VERSION_MAJOR is ${Slicer_VTK_VERSION_MAJOR}")
 message(STATUS "  Slicer_VTK_VERSION_MINOR is ${Slicer_VTK_VERSION_MINOR}")
